@@ -21,35 +21,42 @@
       <form id="user-input-form">
         <div class="form-group">
           <h3>{{.Greeting}}</h3>
+          <div class="listClass">
+              <ul id="chat-list" ></ul>
+          </div>
           <label for="user-input">You</label>
           <input type="text" class="form-control" id="user-input" aria-describedby="user-input-help" placeholder="Enter input">
           <small id="user-input-help" class="form-text text-muted">Type something here and press submit.</small>
         </div>
         
         <button type="submit" class="btn btn-primary">Submit</button>
-
-        <div class="form-group">
-          <label for="output-area">Eliza:</label>
-          <textarea class="form-control" id="output-area" rows="3" disabled></textarea>
-        </div>
       </form>
     </div>
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-
     <script>
 
+       //keept adding to the list 
+       const list = $("#chat-list");
 
       $("#user-input-form").submit(
         function(event) {
+
+          list.append("<li class ='list-group-item-success'>"+"User : " +$('#user-input').val() + "</li>");
+
+          console.log("hello");
           event.preventDefault();
           $.get('/user-input', { value: $('#user-input').val() } )
-            .done(function (data) {
-              $('#output-area').val(data);
-            })
-        });
+          .done(function (data) {
+            list.append("<li class ='list-group-item-danger'>"+"Winston : " +data+ "</li>");
+            $('#user-input').val(" ")  //clear the  inpout field
+        })
+   
+      });
+    
+     
     </script>
   </body>
 </html>
