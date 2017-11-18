@@ -4,14 +4,17 @@ package main
 
 import (
 	"fmt"
-	"net/http"
+	"html/template"
+	"log"
 	"math/rand"
+	"net/http"
 	"regexp"
 	"strings"
 	"time"
- // "html/template"
 )
-type data struct {
+
+//GreetingData does this
+type GreetingData struct {
 	Greeting string
 }
 
@@ -94,26 +97,25 @@ func elizaResponse(input string) string {
 
 }
 
-
 func userinputhandler(w http.ResponseWriter, r *http.Request) {
 	// Get the user input from the request.
 	input := r.URL.Query().Get("value")
 	// send the user input to elizaResponse to be analysed
+	// Trim the user input's end of line characters.
+	input = strings.Trim(input, "\r\n")
 	output := elizaResponse(strings.ToLower(input))
-   // Greeting := g.generateGreeting()
-  //  fmt.Println(Greeting)
-
-//	greetData.Greeting = generateGreeting()
-//	g.Greeting = Greeting
-	// execute the html file
-//	t.Execute(w, &greetData)
-
+	// If the user input was quit, then quit.
+	// Note that Eliza gets to respond to quit before this happens.
+	if strings.Compare(strings.ToLower(strings.TrimSpace(input)), "quit") == 0 {
+		output = "Good bye old chum!"
+	}
+	//write winston response
 	fmt.Fprintf(w, "%s", output)
+
 }
 
-
-func generateGreeting() string{
-		// Winston greetings
+func generateGreeting() string {
+	// Winston greetings
 	var greetings = []string{
 		"Greetings my friend!",
 		"Salutations",
@@ -122,9 +124,27 @@ func generateGreeting() string{
 		"Any news old chum?",
 	}
 
-		random := (rand.Intn(3))
-		//return a random response
-		return (greetings[random])
+	random := (rand.Intn(5))
+	//return a random response
+	return (greetings[random])
+}
+
+func chatSession(w http.ResponseWriter, r *http.Request) {
+	//fs := http.FileServer(http.Dir("static"))
+	//greeting:= generateGreeting()
+	greet := GreetingData{
+		Greeting: generateGreeting(),
+	}
+
+	t, err := template.ParseFiles("index.html") //parse the html file homepage.html
+	if err != nil {                             // if there is an error
+		log.Print("template parsing error: ", err) // log it
+	}
+	err = t.Execute(w, greet) //execute the template and pass it the HomePageVars struct to fill in the gaps
+	if err != nil {           // if there is an error
+		log.Print("template executing error: ", err) //log it
+	}
+
 }
 
 func main() {
@@ -135,15 +155,27 @@ func main() {
 	//return a random response
 	// parse the session html file
 
-
-//	t, _ = template.ParseFiles("/static/index.html")
-
-
+	http.HandleFunc("/", chatSession)
+	//	t, _ = template.ParseFiles("/static/index.html")
 	// Adapted from: http://www.alexedwards.net/blog/serving-static-sites-with-go
-	fs := http.FileServer(http.Dir("static"))
-	http.Handle("/", fs)
 
+	//fs := http.FileServer(http.Dir("static"))
+	//http.Handle("/", fs)
 
+	//tmpl, _ := template.ParseFiles("/static/session.html")
+	/*
+		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+			http.FileServer(http.Dir("static"))
+			greet := GreetingData{
+				Greeting: "hello",
+			}
+
+			tmpl.Execute(w, greet)
+
+		})
+	*/
+	//http.Handle("/", fs)
+	//http.Handle("/", fs)
 	http.HandleFunc("/user-input", userinputhandler)
 	http.ListenAndServe(":8080", nil)
 }
