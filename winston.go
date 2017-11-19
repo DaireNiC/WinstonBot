@@ -233,8 +233,9 @@ func chatSession(w http.ResponseWriter, r *http.Request) {
 
 // Program entry point.
 func main() {
-
+	fs := http.FileServer(http.Dir("static"))
 	http.HandleFunc("/", chatSession)
+	//http.HandleFunc("/", fs)
 
 	http.HandleFunc("/user-input", userinputhandler)
 	http.ListenAndServe(":8080", nil)
