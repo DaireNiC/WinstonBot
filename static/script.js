@@ -23,7 +23,7 @@ $(document).ready(function() {
             greeting = '<li style="width:100%;">' +
                 '<div class="msj-rta macro">' +
                 '<div class="text text-r">' +
-                '<p>' + data + '</p>' +
+                '<p>' + data + " Shall we begin by you giving me a your name? "+ '</p>' +
                 '<p><small>' + '</small></p>' +
                 '</div>' +
                 '<div class="avatar" style="padding:0px 0px 0px 10px !important"><img class="img-circle" style="width:100%;" src="' + winston.avatar + '" /></div>' +

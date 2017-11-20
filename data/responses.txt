@@ -17,6 +17,18 @@ Why do you need $1?
 Would it really help you to get $1?
 Are you sure you need $1?
 
+# e.g. How can I fix my life?
+(?im)^\s*How can I([^\?]*)\?*\s*$
+Why do you want to $1?
+Start with what $1 means to you.
+Good sir, could you elaborate on what $1 really means?
+
+# e.g. I want a real friend
+(?im)^\s*I want ([^\?]*)\?*\s*$
+Do you think you think  $1 will make you happy?
+Is $1 what you truly desire deep down?
+why do you want $1?
+
 # e.g. Why don't you answer me?
 (?im)^\s*Why don'?t you ([^\?]*)\?*\s*$
 Do you really think I don't $1?
@@ -80,11 +92,11 @@ If $1, what else must be true?
 There are many times when no apology is needed.
 What feelings do you have when you apologize?
 
-# e.g. Hello Eliza!
-(?im)^\s*Hello .*\s*$
-Hello... I'm glad you could drop by today.
-Hi there... how are you today?
-Hello, how are you feeling today?
+# e.g. Hello Winston!
+(?i).*hello|hi|how are you|hey.*
+Ahoy hoy... I'm glad you could drop by today.
+Salutations... how are you today good sir?
+Greetings, how are you feeling today old chum?
 
 # e.g. I think I'm lonely
 (?im)^\s*I think ([^\.!]*)[\.!]*\s*$
@@ -95,6 +107,10 @@ But you're not sure $1?
 #e.g I feel so angry
 (?i).*anger|angry.*
 Where you think that anger stems from?
+
+# e.g. f*** you.
+(?i).*fuck.*
+My my! How rude. Why not try articulate your feelings?
 
 # e.g. My friend isn't helpful
 (?i).*friend.*
@@ -244,6 +260,7 @@ Please consider whether you can answer your own question.
 Perhaps the answer lies within yourself?
 Why don't you tell me?
 I do ponder these questions too, what do you think?
+
 
 # e.g. Anything else.
 (.*)
