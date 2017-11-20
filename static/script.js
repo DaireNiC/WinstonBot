@@ -30,6 +30,10 @@ $(document).ready(function() {
                 '</li>';
             ////Append to the chat list
             $("ul").append(greeting);
+
+            $('nav').show('slow', function() {
+                $("nav").scrollTop($("nav")[0].scrollHeight);
+            });        
         })
 });
 

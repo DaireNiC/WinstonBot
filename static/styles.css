@@ -46,12 +46,17 @@ h1{
 .msj{
     float:left;background:white;
 }
+ nav ul{
+    overflow:hidden;
+    overflow-y:scroll;
+    max-height:90%;
+ }
 .frame{
     background:#e0e0de;
     height:450px;
     width: 450px;
-    overflow:auto;
-    padding:0;
+    padding:0px;
+
 }
 .frame > div:last-of-type{
     position:absolute;bottom:5px;width:100%;display:flex;
