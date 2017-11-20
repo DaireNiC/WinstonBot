@@ -1,7 +1,12 @@
-# Eliza in Go
+# Winston Chatbot
 
-This is an example of the Eliza AI chat bot coded in [Go](http://golang.org) for demonstration to students at [GMIT](http://www.gmit.ie).
-The lecturer is [Ian McLoughlin](https://ianmcloughlin.github.io).
+### About
+
+Name: Daire Ní Chatháin
+ID: G00334757
+
+This is an adaptation of the Eliza AI chat bot coded in [Go](http://golang.org). This bot was created as a project in  Ian mcLoughlin's Data Represenation and Querying Module. 
+
 
 The code here is adapted from [smallsurething.com](https://www.smallsurething.com/implementing-the-famous-eliza-chatbot-in-python/).
 
