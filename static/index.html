@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-<!-- From: https://v4-alpha.getbootstrap.com/getting-started/introduction/ -->
-<!--//From: https://bootsnipp.com/snippets/y8e4W  -->
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -8,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="styles.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-  </head>
+    <link rel="stylesheet" type="text/css" href="styles.css">  
+</head>
+
   <body>
     <div class="container">
       <h1>Winston Chatbot</h1>
@@ -20,101 +19,22 @@
       <!-- Adapted from: https://v4-alpha.getbootstrap.com/components/forms/ -->
       <form id="user-input-form">
         <div class="form-group">
-          <h3>{{.Greeting}}</h3>
         <div class="col-sm-3 col-sm-offset-4 frame">
           <ul></ul>
           <div>
               <div class="msj-rta macro" style="margin:auto">                        
                   <div class="text text-r" style="background:whitesmoke !important">
-                      <input class="mytext" id="user-input" placeholder="Type a message"/>
+                      <input class="mytext" id="user-input" placeholder="Type a message"/> <button type="submit" class="btn btn-primary" id ="submit">Submit</button>
                   </div> 
               </div>
           </div>
-      </div>    
-        
-        <button type="submit" class="btn btn-primary">Submit</button>
+             
       </form>
     </div>
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-    <script>
-
-       //keept adding to the list 
-       const list = $("#chat-list");
-       var userinput = $('#user-input').val();
-      $("#user-input-form").submit(
-        function(event) {
-          $('#user-input').val()
-   //       list.append("<li class ='list-group-item-success'>"+"User : " +$('#user-input').val() + "</li>");
-          insertChat("me",  $('#user-input').val());   
-          event.preventDefault();
-          $.get('/user-input', { value: $('#user-input').val() } )
-          .done(function (data) {
-            insertChat("winston", data);   
-      //      list.append("<li class ='list-group-item-danger'>"+"Winston : " +data+ "</li>");
-            $('#user-input').val(" ")  //clear the  inpout field
-        })
-   
-      });
-    
-var me = {};
-me.avatar = "https://christianlifecoachnow.com/wp-content/uploads/2016/12/Blank-Photo.png";
-
-var winston = {};
-winston.avatar = "https://i.pinimg.com/736x/c6/82/05/c68205d4d0fad6fe1c926b0211bccac1--fat-animals-funny-animals.jpg";
-
-function formatAMPM(date) {
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0'+minutes : minutes;
-    var strTime = hours + ':' + minutes + ' ' + ampm;
-    return strTime;
-}            
-
-//-- No use time. It is a javaScript effect.
-function insertChat(who, data, time = 0){
-    var control = "";
-    var date = formatAMPM(new Date());
-    if (who == "me"){
-        
-        control = '<li style="width:100%">' +
-                        '<div class="msj macro">' +
-                        '<div class="avatar"><img class="img-circle" style="width:100%;" src="'+ me.avatar +'" /></div>' +
-                            '<div class="text text-l">' +
-                                '<p>'+ data+'</p>' +
-                                '<p><small>'+date+'</small></p>' +
-                            '</div>' +
-                        '</div>' +
-                    '</li>';                    
-    }else{
-        control = '<li style="width:100%;">' +
-                        '<div class="msj-rta macro">' +
-                            '<div class="text text-r">' +
-                                '<p>'+data+'</p>' +
-                                '<p><small>'+date+'</small></p>' +
-                            '</div>' +
-                        '<div class="avatar" style="padding:0px 0px 0px 10px !important"><img class="img-circle" style="width:100%;" src="'+winston.avatar+'" /></div>' +                                
-                  '</li>';
-    }
-    setTimeout(
-        function(){                        
-            $("ul").append(control);
-
-        }, time);
-    
-}
-
-function resetChat(){
-    $("ul").empty();
-}
-
-
-     
-    </script>
+    <script src = "script.js"></script>
   </body>
 </html>

@@ -5,7 +5,6 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"html/template"
 	"log"
 	"math/rand"
 	"net/http"
@@ -214,31 +213,21 @@ func generateGreeting() string {
 }
 
 func chatSession(w http.ResponseWriter, r *http.Request) {
-	//fs := http.FileServer(http.Dir("static"))
-	//greeting:= generateGreeting()
-	greet := GreetingData{
-		Greeting: generateGreeting(),
-	}
 
-	t, err := template.ParseFiles("index.html") //parse the html file homepage.html
-	if err != nil {                             // if there is an error
-		log.Print("template parsing error: ", err) // log it
-	}
-	err = t.Execute(w, greet) //execute the template and pass it the HomePageVars struct to fill in the gaps
-	if err != nil {           // if there is an error
-		log.Print("template executing error: ", err) //log it
-	}
+	http.FileServer(http.Dir("./static"))
+	fmt.Fprintf(w, "%s", generateGreeting())
 
 }
 
 // Program entry point.
 func main() {
 	fs := http.FileServer(http.Dir("static"))
-	http.HandleFunc("/", chatSession)
-	//http.HandleFunc("/", fs)
+	http.Handle("/", fs)
+	http.HandleFunc("/chat-session", chatSession)
 
+	//http.HandleFunc("/", chatSession)
 	http.HandleFunc("/user-input", userinputhandler)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":8000", nil)
 
 }
 

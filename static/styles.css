@@ -1,4 +1,16 @@
-
+/*adapted from : https://bootsnipp.com/snippets/y8e4W*/
+h1{
+    width:100%;margin-top:0;margin-bottom:auto;line-height: 13px;font-size: 12px;
+    text-align: center;
+}
+#submit{
+    width:100%;
+    margin-top:0;
+    margin-bottom:auto;
+    line-height: 13px;
+    font-size: 12px;
+    margin-left: 30%;
+}
 .mytext{
     border:0;padding:10px;background:whitesmoke;
 }
@@ -37,7 +49,8 @@
 .frame{
     background:#e0e0de;
     height:450px;
-    overflow:hidden;
+    width: 450px;
+    overflow:auto;
     padding:0;
 }
 .frame > div:last-of-type{
