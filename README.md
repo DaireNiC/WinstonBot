@@ -11,7 +11,7 @@ This is an adaptation of the Eliza AI chat bot coded in [Go](http://golang.org).
 
 
 ### Winston
-Winston is a polite, butler-esque chat bot who only want the best for you. Similar to Eliza he acts as psychotherapist, asking open ended questions, always getting the user to guide the conversation. He has a set of unique greetings and responses in keeping with his character, e.g Winston uses phrases such as "Tally-ho!", "Old chum" and "Salutations!". 
+Winston is a polite, butler-esque chat bot who only want the best for you. Similar to Eliza, he acts as psychotherapist. Winston asks open ended questions, always getting the user to guide the conversation. He also has a set of unique greetings and responses in keeping with his character. Winston uses phrases such as "Tally-ho!", "Old chum" and "Salutations!". 
 
 
 ## Compilation
