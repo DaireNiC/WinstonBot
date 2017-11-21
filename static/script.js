@@ -30,11 +30,8 @@ $(document).ready(function() {
                 '</li>';
             ////Append to the chat list
             $("ul").append(greeting);
-
-            $('nav').show('slow', function() {
-                $("nav").scrollTop($("nav")[0].scrollHeight);
-            });        
         })
+        
 });
 
 
@@ -87,6 +84,8 @@ function insertChat(who, data, time = 0) {
         function() {
             //add the new html to the list for display
             $("ul").append(control);
+            //make scroll bar come to bottom
+           $("ul").scrollTop($("ul")[0].scrollHeight);
 
         }, time);
 }

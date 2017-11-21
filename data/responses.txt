@@ -93,7 +93,7 @@ There are many times when no apology is needed.
 What feelings do you have when you apologize?
 
 # e.g. Hello Winston!
-(?i).*hello|hi|how are you|hey.*
+(?i).*hello|hi|how are you|hey|waddup.*
 Ahoy hoy... I'm glad you could drop by today.
 Salutations... how are you today good sir?
 Greetings, how are you feeling today old chum?
