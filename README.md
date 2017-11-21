@@ -28,24 +28,22 @@ Winston operates by using [RegeX](https://golang.org/pkg/regexp/) to recognise k
 ### Code Design
 In coding this implementation of Eliza I decided not to re-invent the wheel. I built my web app up using previous exercises completed in the problem sheets assigned for this module. To begin I had a simple web app that served a html page. Using AJAX a user could enter input which would then be appended onto a list and rendered in the view. 
 
-When it came to adding in the eliza functionality I first used my basic implemenation completed in my [03_problem sheet](https://github.com/DaireNiC/03_go_problem_sheet). I then decided to add in the more efficient code available here(https://github.com/data-representation/eliza). I built upon this adding more regeX to add a richer conversation experience along with giving the chatbot a quirky personality. I finished by styling to the aplication using bootstrap.
+When it came to adding in the eliza functionality I first used my basic implemenation completed in my [03_problem sheet](https://github.com/DaireNiC/03_go_problem_sheet). I then decided to add in the more efficient code available here(https://github.com/data-representation/eliza). I built upon this by adding more regeX patterns and unique responses. his enhances the bot by offering a richer conversation experience along with giving the chatbot a quirky personality. I finished by styling to the aplication using bootstrap.
 
 ## Compilation
 [Go](https://golang.org) must be installed to run the code.
 
-###Clone this repo
+### Clone this repo
 ```bash
 git clone https://github.com/DaireNiC/WinstonBot
 ```
 ### Navigate to the folder
-
 ```bash
 cd WinstonBot
 ```
 ### Build and the web app:
-
 ```go
-go build ./winston.go
+go build winston.go
 ```
 ### Run the exe:
 ```bash
