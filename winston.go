@@ -16,6 +16,11 @@ import (
 )
 
 //GreetingData does this
+type userName struct {
+	Name string
+}
+
+//GreetingData does this
 type GreetingData struct {
 	Greeting string
 }
@@ -198,39 +203,69 @@ func userinputhandler(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func generateGreeting(name string) string {
+func generateGreeting(w http.ResponseWriter, r *http.Request) {
+
+	name := getCookie(w, r)
+	greeting := ""
+
 	// Winston greetings
-	var greetings = []string{
-		"Greetings my friend!",
-		"Salutations",
-		"Ahoy hoy, How goes you?",
+	var oldUserGreetings = []string{
+		"$ my old friend, how goes you?",
+		"Salutations $",
+		"Ahoy hoy $, it's great to see you again.",
+		"$, how are you today old chap?",
+		"$, any news old chum?",
+		"$, it's been a while since our last chat.",
+	}
+
+	var newUsergreetings = []string{
+		"Greetings $! ",
+		"Salutations $",
+		"Ahoy hoy $, it's great to meet you.",
 		"How are you today old chap?",
-		"Any news old chum?",
+		"Welcome, $. How goes you?",
 	}
 
 	random := (rand.Intn(5))
+
+	//if user has name
+	if name != "" {
+		greeting = oldUserGreetings[random]
+	} else {
+		greeting = newUsergreetings[random]
+	}
+
+	greeting = strings.Replace(greeting, "$", name, -1)
 	//return a random response
-	return (greetings[random] + name)
+	fmt.Fprintf(w, "%s", greeting)
 }
-
-func chatSession(w http.ResponseWriter, r *http.Request) {
-
-	http.FileServer(http.Dir("./static"))
-
-	//check if there is a cookie if yes get the name
+func getCookie(w http.ResponseWriter, r *http.Request) string {
+	name := ""
 	var cookie, err = r.Cookie("username")
 	if err == nil {
-		fmt.Fprintf(w, "%s", cookie.Value)
+		name = cookie.Value
 	}
 	// Create a cookie instance and set the cookie.
 	// You can delete the Expires line (and the time import) to make a session cookie.
+	if name == "" {
+		name = r.URL.Query().Get("name")
+	}
+
 	cookie = &http.Cookie{
 		Name:    "username",
-		Value:   r.URL.Query().Get("name"),
+		Value:   name,
 		Expires: time.Now().Add(72 * time.Hour),
 	}
 
 	http.SetCookie(w, cookie)
+	return name
+}
+func chatSession(w http.ResponseWriter, r *http.Request) {
+
+	http.FileServer(http.Dir("./static"))
+	name := getCookie(w, r)
+
+	fmt.Fprintf(w, "%s", name)
 	//	fmt.Fprintf(w, "%s", generateGreeting((name)))
 
 }
@@ -241,6 +276,7 @@ func main() {
 	http.Handle("/", fs)
 	http.HandleFunc("/chat-session", chatSession)
 
+	http.HandleFunc("/generate-greeting", generateGreeting)
 	//http.HandleFunc("/", chatSession)
 	http.HandleFunc("/user-input", userinputhandler)
 	http.ListenAndServe(":8000", nil)

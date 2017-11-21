@@ -2,6 +2,7 @@
 $(window).on('load',function(){
     //check if there is a cookie
     $.get('/chat-session', {
+        name: $('#name').val()
     })
     .done(function(data) {
         console.log(data);
@@ -13,7 +14,6 @@ $(window).on('load',function(){
             $('#name').hide();
        }
        $('#myModal').modal('show');
-      
     });
 })
 
@@ -38,13 +38,11 @@ $("#user-input-form").submit(
 $("#name-form").submit(
     function(event) {
         event.preventDefault();
-        console.log($("#name").val());
-        $.get('/chat-session', {
+        $.get('/generate-greeting', {
             name:$("#name").val()
         })
         .done(function(data) {
             console.log(data)
-
             greeting = '<li style="width:100%;">' +
             '<div class="msj-rta macro">' +
             '<div class="text text-r">' +
