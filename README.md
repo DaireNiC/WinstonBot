@@ -18,18 +18,12 @@ Winston is a  goLang web-app. It serves a HTML page as the root resource. Once t
 
 Winston operates by using [RegeX](https://golang.org/pkg/regexp/) to recognise key words or phrases from the user input to reproduce a response using those keywords from pre–programmed responses which can be found in the data/responses.dat file. 
 
- Markup : 1. The user enters input.
-          2. This input is then prepared for processing.
-          3. The input is searched for keywords.
-          4. Pronouns are swapped.
-          5. The response is displayed in the chat window.
-
- Markup : 1. The user enters input.
-              1. This input is then prepared for processing.
-              2.  The input is searched for keywords.
-          2. Pronouns are swapped.
-          3. The response is displayed in the chat window.
-
+1. The user enters input.
+2. This input is then prepared for processing.
+3. The input is searched for keywords.
+4. Pronouns are swapped.
+5. The response is displayed in the chat window.
+          
 ## Compilation
 [Go](https://golang.org) must be installed to run the code.
 
