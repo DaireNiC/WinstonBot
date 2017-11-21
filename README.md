@@ -24,7 +24,11 @@ Winston operates by using [RegeX](https://golang.org/pkg/regexp/) to recognise k
           4. Pronouns are swapped.
           5. The response is displayed in the chat window.
 
-
+ Markup : 1. The user enters input.
+              1. This input is then prepared for processing.
+              2.  The input is searched for keywords.
+          2. Pronouns are swapped.
+          3. The response is displayed in the chat window.
 
 ## Compilation
 [Go](https://golang.org) must be installed to run the code.
