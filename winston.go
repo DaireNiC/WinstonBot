@@ -197,6 +197,7 @@ func userinputhandler(w http.ResponseWriter, r *http.Request) {
 
 }
 
+
 func generateGreeting() string {
 	// Winston greetings
 	var greetings = []string{
@@ -207,6 +208,7 @@ func generateGreeting() string {
 		"Any news old chum?",
 	}
 
+
 	random := (rand.Intn(5))
 	//return a random response
 	return (greetings[random])
@@ -215,7 +217,9 @@ func generateGreeting() string {
 func chatSession(w http.ResponseWriter, r *http.Request) {
 
 	http.FileServer(http.Dir("./static"))
-	fmt.Fprintf(w, "%s", generateGreeting())
+	// Get the user name from the request.
+	name := r.PostFormValue("name")
+	fmt.Fprintf(w, "%s", generateGreeting(), name)
 
 }
 
@@ -224,6 +228,7 @@ func main() {
 	fs := http.FileServer(http.Dir("static"))
 	http.Handle("/", fs)
 	http.HandleFunc("/chat-session", chatSession)
+
 
 	//http.HandleFunc("/", chatSession)
 	http.HandleFunc("/user-input", userinputhandler)

@@ -1,3 +1,7 @@
+
+$(window).on('load',function(){
+    $('#myModal').modal('show');
+});
 $("#user-input-form").submit(
     function(event) {
         //render the input inthe chat window
@@ -15,23 +19,44 @@ $("#user-input-form").submit(
             })
     });
 
-//get a random greeting only once when the page loads
+$(function  () { //shorthand document.ready function
+    $('#name-form').on('submit', function(e) { //use on if jQuery 1.7+
+        e.preventDefault();  //prevent form from submitting
+        var data = $("#name-form :input");
+        console.log(data); //use the console for debugging, F12 in Chrome, not alerts
+    });
+});
+
 $(document).ready(function() {
+$(function  () { //shorthand document.ready function
+    $('#name-form').on('submit', function(e) { //use on if jQuery 1.7+
+        e.preventDefault();  //prevent form from submitting
+        var data = $("#name-form :input");
+        console.log(data); //use the console for debugging, F12 in Chrome, not alerts
+    });
+});
+});
+
+//get a random greeting only once when the page loads
+//$(document).ready(function() {
+$("#name-form").submit(function() {
+    console.log("hi")
     $.get('/chat-session') //call this handler in the .go file
-        .done(function(data) {
+        .done(function(data, name) {
+            console.log(name);
             //add the greeting to the HTML Markup
             greeting = '<li style="width:100%;">' +
                 '<div class="msj-rta macro">' +
                 '<div class="text text-r">' +
                 '<p>' + data + " Shall we begin by you giving me a your name? "+ '</p>' +
-                '<p><small>' + '</small></p>' +
+                '<p><small>' +name +  '</small></p>' +
                 '</div>' +
                 '<div class="avatar" style="padding:0px 0px 0px 10px !important"><img class="img-circle" style="width:100%;" src="' + winston.avatar + '" /></div>' +
                 '</li>';
             ////Append to the chat list
             $("ul").append(greeting);
         })
-        
+//)     
 });
 
 
