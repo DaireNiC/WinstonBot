@@ -1,7 +1,22 @@
 
 $(window).on('load',function(){
-    $('#myModal').modal('show');
-});
+    //check if there is a cookie
+    $.get('/chat-session', {
+    })
+    .done(function(data) {
+        console.log(data);
+       if(data == ""){
+            $("#greet").text(" Why not enter your name so Winston can get to know you better ");              
+       }
+       else{
+            $("#greet").text("Welcome back " + data + "Winston is looking forward to chatting to you again!" );
+            $('#myModal').modal('show');
+       }
+      
+    });
+})
+
+
 $("#user-input-form").submit(
     function(event) {
         //render the input inthe chat window
@@ -19,14 +34,34 @@ $("#user-input-form").submit(
             })
     });
 
-$(function  () { //shorthand document.ready function
-    $('#name-form').on('submit', function(e) { //use on if jQuery 1.7+
-        e.preventDefault();  //prevent form from submitting
-        var data = $("#name-form :input");
-        console.log(data); //use the console for debugging, F12 in Chrome, not alerts
-    });
+$("#name-form").submit(
+    function(event) {
+        event.preventDefault();
+        console.log($("#name").val());
+        $.get('/chat-session', {
+            name:$("#name").val()
+        })
+        .done(function(data) {
+            console.log(data)
+
+            greeting = '<li style="width:100%;">' +
+            '<div class="msj-rta macro">' +
+            '<div class="text text-r">' +
+            '<p>' + data + '</p>' +
+            '<p><small>'  +  '</small></p>' +
+            '</div>' +
+            '<div class="avatar" style="padding:0px 0px 0px 10px !important"><img class="img-circle" style="width:100%;" src="' + winston.avatar + '" /></div>' +
+            '</li>';
+        //Append to the chat list
+        $("ul").append(greeting);
+        //close dow the modal
+        $('#myModal').modal('toggle');
+        })
+
 });
 
+
+/*
 $(document).ready(function() {
 $(function  () { //shorthand document.ready function
     $('#name-form').on('submit', function(e) { //use on if jQuery 1.7+
@@ -38,9 +73,9 @@ $(function  () { //shorthand document.ready function
 });
 
 //get a random greeting only once when the page loads
-//$(document).ready(function() {
-$("#name-form").submit(function() {
-    console.log("hi")
+$(document).ready(function() {
+    $("#name-form").val();
+    console.log($("#name-form").val());
     $.get('/chat-session') //call this handler in the .go file
         .done(function(data, name) {
             console.log(name);
@@ -58,7 +93,7 @@ $("#name-form").submit(function() {
         })
 //)     
 });
-
+*/
 
 //User & Winston avatars
 var me = {};

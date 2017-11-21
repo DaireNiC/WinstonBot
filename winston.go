@@ -12,6 +12,7 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"time"
 )
 
 //GreetingData does this
@@ -197,8 +198,7 @@ func userinputhandler(w http.ResponseWriter, r *http.Request) {
 
 }
 
-
-func generateGreeting() string {
+func generateGreeting(name string) string {
 	// Winston greetings
 	var greetings = []string{
 		"Greetings my friend!",
@@ -208,18 +208,38 @@ func generateGreeting() string {
 		"Any news old chum?",
 	}
 
-
 	random := (rand.Intn(5))
 	//return a random response
-	return (greetings[random])
+	return (greetings[random] + name)
 }
 
 func chatSession(w http.ResponseWriter, r *http.Request) {
 
 	http.FileServer(http.Dir("./static"))
+
+	name := ""
+	//check if there is a cookie if yes get the name
+	var cookie, err = r.Cookie("username")
+	if err == nil {
+		// If we could read it, try to convert its value to an int.
+		name = cookie.Value
+	}
+	// if not get the name from input
 	// Get the user name from the request.
-	name := r.PostFormValue("name")
-	fmt.Fprintf(w, "%s", generateGreeting(), name)
+	//name := r.URL.Query().Get("name")
+
+	// Create a cookie instance and set the cookie.
+	// You can delete the Expires line (and the time import) to make a session cookie.
+	cookie = &http.Cookie{
+		Name:    "username",
+		Value:   r.URL.Query().Get("name"),
+		Expires: time.Now().Add(72 * time.Hour),
+	}
+	http.SetCookie(w, cookie)
+
+	//	fmt.Fprintf(w, "%s", generateGreeting((name)))
+
+	fmt.Fprintf(w, "%s", name)
 
 }
 
@@ -228,7 +248,6 @@ func main() {
 	fs := http.FileServer(http.Dir("static"))
 	http.Handle("/", fs)
 	http.HandleFunc("/chat-session", chatSession)
-
 
 	//http.HandleFunc("/", chatSession)
 	http.HandleFunc("/user-input", userinputhandler)
