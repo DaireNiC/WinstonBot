@@ -6,12 +6,13 @@ $(window).on('load',function(){
     .done(function(data) {
         console.log(data);
        if(data == ""){
-            $("#greet").text(" Why not enter your name so Winston can get to know you better ");              
+            $("#greet").text("Why not enter your name so Winston can get to know you better "); 
        }
        else{
-            $("#greet").text("Welcome back " + data + "Winston is looking forward to chatting to you again!" );
-            $('#myModal').modal('show');
+            $("#greet").text("Welcome back " + data + ". Winston is looking forward to chatting to you again!" );
+            $('#name').hide();
        }
+       $('#myModal').modal('show');
       
     });
 })

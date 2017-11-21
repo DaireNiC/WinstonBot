@@ -217,17 +217,11 @@ func chatSession(w http.ResponseWriter, r *http.Request) {
 
 	http.FileServer(http.Dir("./static"))
 
-	name := ""
 	//check if there is a cookie if yes get the name
 	var cookie, err = r.Cookie("username")
 	if err == nil {
-		// If we could read it, try to convert its value to an int.
-		name = cookie.Value
+		fmt.Fprintf(w, "%s", cookie.Value)
 	}
-	// if not get the name from input
-	// Get the user name from the request.
-	//name := r.URL.Query().Get("name")
-
 	// Create a cookie instance and set the cookie.
 	// You can delete the Expires line (and the time import) to make a session cookie.
 	cookie = &http.Cookie{
@@ -235,11 +229,9 @@ func chatSession(w http.ResponseWriter, r *http.Request) {
 		Value:   r.URL.Query().Get("name"),
 		Expires: time.Now().Add(72 * time.Hour),
 	}
+
 	http.SetCookie(w, cookie)
-
 	//	fmt.Fprintf(w, "%s", generateGreeting((name)))
-
-	fmt.Fprintf(w, "%s", name)
 
 }
 
