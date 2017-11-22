@@ -19,8 +19,8 @@ Are you sure you need $1?
 
 # e.g. How can I fix my life?
 (?im)^\s*How can I([^\?]*)\?*\s*$
-W#hy do you want to $1?
-#Start with what $1 means to you.
+Why do you want to $1?
+Start with what $1 means to you.
 Good sir, could you elaborate on what $1 really means?
 
 # e.g. I want a friend
@@ -32,8 +32,8 @@ why do you want $1?
 # e.g. Why don't you answer me?
 (?im)^\s*Why don'?t you ([^\?]*)\?*\s*$
 Good grief! Do you really think I don't $1?
-#Perhaps eventually I will $1.
-#By Jove, do you really want me to $1?
+Perhaps eventually I will $1.
+By Jove, do you really want me to $1?
 
 # e.g. Why can't I help myself?
 (?im)^\s*Why can'?t I ([^\?]*)\?*\s*$
@@ -93,20 +93,19 @@ There are many times when no apology is needed.
 What feelings do you have when you apologize?
 
 # e.g. Hello Winston!
-(?i).*hello.*|.*hi.*|.*how are you.*|.*hey.*|.*waddup.*
+(?i).*hello|hi|how are you|hey|waddup.*
 Ahoy hoy... I'm glad you could drop by today.
 Salutations... how are you today good sir?
 Greetings, how are you feeling today old chum?
 
 # e.g. I think I'm lonely
 (?im)^\s*I think ([^\.!]*)[\.!]*\s*$
-#Do you doubt $1?
+Do you doubt $1?
 By Jove, Do you really think so?
-#But you're not sure $1?
-####################################
+But you're not sure $1?
 
 #e.g I feel so angry
-(?i).*angry.*
+(?i).*anger|angry.*
 Where you think that anger stems from?
 Anger is a rather destructive feeling.
 
@@ -123,8 +122,8 @@ Why don't you tell me about a childhood friend?
 
 # e.g. Yes
 (?im)^\s*Yes\s*$
-#You seem quite sure.
-#Perhaps, but can you elaborate a bit?
+You seem quite sure.
+Perhaps, but can you elaborate a bit?
 It's good to be sure. Carpe diem as they say. Good show!
 
 # e.g. You're just a computer program.
@@ -161,8 +160,8 @@ If you could $1, would you?
 # e.g. You are nice!
 (?im)^\s*You are ([^\.!]*)[\.!]*\s*$
 Tally-ho! Why do you think I am $1?
-#Does it please you to think that I'm $1?
-#Perhaps you would like me to be $1.
+Does it please you to think that I'm $1?
+Perhaps you would like me to be $1.
 Perhaps you're really talking about yourself?
 
 # e.g. You're a jackass.
@@ -198,8 +197,8 @@ Who else knows that you would $1?
 
 # e.g. I feel good.
 (?i).*good.*
-#Jolly good. Why so?
-#Marvellous! Why so?
+Jolly good. Why so?
+Marvellous! Why so?
 A fortunate stroke of serendipity?
 
 # e.g. Is there any hope?
