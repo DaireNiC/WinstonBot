@@ -107,7 +107,7 @@ But you're not sure $1?
 #e.g I feel so angry
 (?i).*anger|angry.*
 Where you think that anger stems from?
-Anger is a rather destructive feeling
+Anger is a rather destructive feeling.
 
 # e.g. f*** you.
 (?i).*feck.*
@@ -123,7 +123,7 @@ Why don't you tell me about a childhood friend?
 # e.g. Yes
 (?im)^\s*Yes\s*$
 You seem quite sure.
-OK, but can you elaborate a bit?
+Perhaps, but can you elaborate a bit?
 It's good to be sure. Carpe diem as they say. Good show!
 
 # e.g. You're just a computer program.
@@ -246,6 +246,10 @@ How did your father make you feel?
 How do you feel about your father?
 Does your relationship with your father relate to your feelings today?
 Do you have trouble showing affection with your family?
+
+# e.g. thanks WInston
+(?i).*thanks.*|thank.*|.*cheers.*
+My pleasure old chap!
 
 # e.g. I had a tough childhood.
 (?i).*child.*
