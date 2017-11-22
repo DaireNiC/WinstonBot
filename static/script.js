@@ -1,24 +1,22 @@
 //when the page loads..
-$(window).on('load',function(){
-    console.log("HEYYYYYYYYYYYA");
+$(window).on('load', function() {
     //check if there is a cookie by calling handler
     $.get('/chat-session', {
-        name: $('#name').val() //pass in the value of new inout name if needed
-    })
-    .done(function(data) {
-        //if there is no cookie value
-       if(data == ""){
-           //let modal appear & ask for user name
-            $("#greet").text("Why not enter your name so Winston can get to know you better "); 
-       }
-       else{
-           //if cookie exists & have username, hide the input box for name 
-            $("#greet").text("Welcome back " + data + ". Winston is looking forward to chatting to you again!" );
-            $('#name').hide();
-       }
-       //show the modal after hmtl ready & cookie checkk complete
-       $('#myModal').modal('show');
-    });
+            name: $('#name').val() //pass in the value of new inout name if needed
+        })
+        .done(function(data) {
+            //if there is no cookie value
+            if (data == "") {
+                //let modal appear & ask for user name
+                $("#greet").text("Why not enter your name so Winston can get to know you better ");
+            } else {
+                //if cookie exists & have username, hide the input box for name 
+                $("#greet").text("Welcome back " + data + ". Winston is looking forward to chatting to you again!");
+                $('#name').hide();
+            }
+            //show the modal after hmtl ready & cookie checkk complete
+            $('#myModal').modal('show');
+        });
 })
 
 //when the user hits enter after entering chata text
@@ -33,34 +31,34 @@ $("#user-input-form").submit(
                 value: $('#user-input').val()
             })
             .done(function(data) { //return winston's response
-                insertChat("winston", data);//render it in the HTML
+                insertChat("winston", data); //render it in the HTML
                 $('#user-input').val(" ") //clear the  input field
             })
     });
 
- //get the name the user inputs from the modal
+//get the name the user inputs from the modal
 $("#name-form").submit(
     function(event) {
         event.preventDefault(); //AJAX
         $.get('/generate-greeting', {
-            name:$("#name").val() //generate a greeting ased upon if cookie stored & name saved or new user
-        })
-        .done(function(data) { //return greeting
-            //attatch the greeting to the html for rendering
-            greeting = '<li style="width:100%;">' +
-            '<div class="msj-rta macro">' +
-            '<div class="text text-r">' +
-            '<p>' + data + '</p>' +
-            '<p><small>'  +  '</small></p>' +
-            '</div>' +
-            '<div class="avatar" style="padding:0px 0px 0px 10px !important"><img class="img-circle" style="width:100%;" src="' + winston.avatar + '" /></div>' +
-            '</li>';
-        //Append to the chat list
-        $("ul").append(greeting);
-        //close down the modal
-        $('#myModal').modal('toggle');
-        })
-});
+                name: $("#name").val() //generate a greeting ased upon if cookie stored & name saved or new user
+            })
+            .done(function(data) { //return greeting
+                //attatch the greeting to the html for rendering
+                greeting = '<li style="width:100%;">' +
+                    '<div class="msj-rta macro">' +
+                    '<div class="text text-r">' +
+                    '<p>' + data + '</p>' +
+                    '<p><small>' + '</small></p>' +
+                    '</div>' +
+                    '<div class="avatar" style="padding:0px 0px 0px 10px !important"><img class="img-circle" style="width:100%;" src="' + winston.avatar + '" /></div>' +
+                    '</li>';
+                //Append to the chat list
+                $("ul").append(greeting);
+                //close down the modal
+                $('#myModal').modal('toggle');
+            })
+    });
 
 //User & Winston avatars
 var me = {};
@@ -112,7 +110,7 @@ function insertChat(who, data, time = 0) {
             //add the new html to the list for display
             $("ul").append(control);
             //make scroll bar come to bottom
-           $("ul").scrollTop($("ul")[0].scrollHeight);
+            $("ul").scrollTop($("ul")[0].scrollHeight);
 
         }, 200); //wait before appending too html for smoother UX
 }

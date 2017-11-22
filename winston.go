@@ -1,5 +1,4 @@
-//Resources: (1) https://ianmcloughlin.github.io
-
+//Resources: (1) https://ianmcloughlin.github.io/eliza
 package main
 
 import (
@@ -15,12 +14,12 @@ import (
 	"time"
 )
 
-//GreetingData does this
+//Structto hold username
 type userName struct {
 	Name string
 }
 
-//GreetingData does this
+//GreetingData
 type GreetingData struct {
 	Greeting string
 }
@@ -190,10 +189,6 @@ func userinputhandler(w http.ResponseWriter, r *http.Request) {
 	// Trim the user input's end of line characters.
 	input = strings.Trim(input, "\r\n")
 	output := winston.analyse(strings.ToLower(input))
-	// Note that winston gets to respond to quit before this happens.
-	if strings.Compare(strings.ToLower(strings.TrimSpace(input)), "quit") == 0 {
-		output = "Good bye old chum!"
-	}
 	//write winston response
 	fmt.Fprintf(w, "%s", output)
 
