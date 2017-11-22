@@ -14,7 +14,7 @@ Computer scientist, Joseph Weizenbaum created the ELIZA program in the early 196
 Winston is a polite, butler-esque chat bot who only wants the best for you. Similar to Eliza, he emulates a Rogerian psychotherapist. Winston asks open ended questions, always getting the user to guide the conversation. He also has a set of unique greetings and responses in keeping with his character. Winston uses phrases such as "Tally-ho!", "Old chum" and "Salutations!". 
 
 ### Winston in Action
-![Alt Text](https://github.com/DaireNiC/WinstonBot/blob/master/winston_example.gif | width=250))
+![Alt Text](https://github.com/DaireNiC/WinstonBot/blob/master/winston_example.gif | width=250)
 
 
 ### How it works
