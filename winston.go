@@ -203,21 +203,21 @@ func generateGreeting(w http.ResponseWriter, r *http.Request) {
 	//greetings for a user who has visited before
 	var pastUserGreetings = []string{
 		"$ my old friend, how goes you?",
-		"Ahoy hoy $, it's great to see you again.",
-		"$, how are you today old chap?",
-		"$, any news old chum?",
-		"$, it's been a while since our last chat.",
+		//	"Ahoy hoy $, it's great to see you again.",
+		//	"$, how are you today old chap?",
+		//	"$, any news old chum?",
+		//	"$, it's been a while since our last chat.",
 	}
 	//new user greetings
 	var newUsergreetings = []string{
-		"Greetings $! ",
-		"Salutations $!",
-		"Ahoy hoy $, it's great to meet you.",
-		"How are you today old chap?",
-		"Welcome, $. How goes you?",
+		//		"Greetings $! ",
+		//		"Salutations $!",
+		//		"Ahoy hoy $, it's great to meet you.",
+		//		"How are you today old chap?",
+		"Ahoy hoy $! How goes you?",
 	}
 	//random number for random greeting
-	random := (rand.Intn(5))
+	random := (rand.Intn(1))
 
 	//if user name was stored in cookie
 	if name != "" {
