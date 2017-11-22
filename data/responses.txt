@@ -23,7 +23,7 @@ Why do you want to $1?
 Start with what $1 means to you.
 Good sir, could you elaborate on what $1 really means?
 
-# e.g. I want a real friend
+# e.g. I want a friend
 (?im)^\s*I want ([^\?]*)\?*\s*$
 Do you think you think  $1 will make you happy?
 Is $1 what you truly desire deep down?
@@ -31,9 +31,9 @@ why do you want $1?
 
 # e.g. Why don't you answer me?
 (?im)^\s*Why don'?t you ([^\?]*)\?*\s*$
-Do you really think I don't $1?
+Good grief! Do you really think I don't $1?
 Perhaps eventually I will $1.
-Do you really want me to $1?
+By Jove, do you really want me to $1?
 
 # e.g. Why can't I help myself?
 (?im)^\s*Why can'?t I ([^\?]*)\?*\s*$
@@ -101,16 +101,18 @@ Greetings, how are you feeling today old chum?
 # e.g. I think I'm lonely
 (?im)^\s*I think ([^\.!]*)[\.!]*\s*$
 Do you doubt $1?
-Do you really think so?
+By Jove, Do you really think so?
 But you're not sure $1?
 
 #e.g I feel so angry
 (?i).*anger|angry.*
 Where you think that anger stems from?
+Anger is a rather destructive feeling
 
 # e.g. f*** you.
-(?i).*fuck.*
+(?i).*feck.*
 My my! How rude. Why not try articulate your feelings?
+That is most unsporting!
 
 # e.g. My friend isn't helpful
 (?i).*friend.*
@@ -122,10 +124,11 @@ Why don't you tell me about a childhood friend?
 (?im)^\s*Yes\s*$
 You seem quite sure.
 OK, but can you elaborate a bit?
+It's good to be sure. Carpe diem as they say. Good show!
 
 # e.g. You're just a computer program.
 (?i).*computer.*
-Are you really talking about me?
+Perhaps you really talking about me?
 Does it seem strange to talk to a computer?
 How do computers make you feel?
 Do you feel threatened by computers?
@@ -139,7 +142,7 @@ It could well be that $1.
 
 # e.g. It is obvious
 (?im)^\s*It is ([^\.!]*)[\.!]*\s*$
-You seem very certain.
+By Jove, you seem very certain.
 If I told you that it probably isn't $1, what would you feel?
 
 # e.g. Can you help me?
@@ -156,7 +159,7 @@ If you could $1, would you?
 
 # e.g. You are nice!
 (?im)^\s*You are ([^\.!]*)[\.!]*\s*$
-Why do you think I am $1?
+Tally-ho! Why do you think I am $1?
 Does it please you to think that I'm $1?
 Perhaps you would like me to be $1.
 Perhaps you're really talking about yourself?
@@ -191,6 +194,12 @@ Now that you have $1, what will you do next?
 Could you explain why you would $1?
 Why would you $1?
 Who else knows that you would $1?
+
+# e.g. I feel good.
+(?i).*good.*
+Jolly good. Why so?
+Marvellous! Why so?
+A fortunate stroke of serendipity?
 
 # e.g. Is there any hope?
 (?im)^\s*Is there ([^\?]*)\?*\s*$
@@ -261,10 +270,11 @@ Perhaps the answer lies within yourself?
 Why don't you tell me?
 I do ponder these questions too, what do you think?
 
-
 # e.g. Anything else.
 (.*)
 Good show old chap!
+Oh darling, pass me a crumpet.
+How about a nice cup of Earl Grey?
 Please tell me more.
 Let's change focus a bit... Tell me about your family.
 Can you elaborate on that?

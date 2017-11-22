@@ -12,7 +12,13 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"time"
 )
+
+//GreetingData does this
+type userName struct {
+	Name string
+}
 
 //GreetingData does this
 type GreetingData struct {
@@ -178,10 +184,6 @@ var winston = Winston{}
 
 func userinputhandler(w http.ResponseWriter, r *http.Request) {
 
-	// Read the substitutions file.
-	winston.readsubstitutions("data/substitutions.txt")
-	// Read the responses file.
-	winston.readresponses("data/responses.txt")
 	// Get the user input from the request.
 	input := r.URL.Query().Get("value")
 	// send the user input to winstonResponse to be analysed
@@ -197,71 +199,89 @@ func userinputhandler(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func generateGreeting() string {
-	// Winston greetings
-	var greetings = []string{
-		"Greetings my friend!",
-		"Salutations",
-		"Ahoy hoy, How goes you?",
+//Generates a greeting for the user
+func generateGreeting(w http.ResponseWriter, r *http.Request) {
+	//check cookie to see if user has visited before
+	name := getCookie(w, r)
+	greeting := ""
+
+	//greetings for a user who has visited before
+	var pastUserGreetings = []string{
+		"$ my old friend, how goes you?",
+		"Ahoy hoy $, it's great to see you again.",
+		"$, how are you today old chap?",
+		"$, any news old chum?",
+		"$, it's been a while since our last chat.",
+	}
+	//new user greetings
+	var newUsergreetings = []string{
+		"Greetings $! ",
+		"Salutations $!",
+		"Ahoy hoy $, it's great to meet you.",
 		"How are you today old chap?",
-		"Any news old chum?",
+		"Welcome, $. How goes you?",
+	}
+	//random number for random greeting
+	random := (rand.Intn(5))
+
+	//if user name was stored in cookie
+	if name != "" {
+		greeting = pastUserGreetings[random]
+	} else {
+		greeting = newUsergreetings[random] //new user greeting
 	}
 
-	random := (rand.Intn(5))
-	//return a random response
-	return (greetings[random])
+	//Replace the $ with the user's name
+	greeting = strings.Replace(greeting, "$", name, -1)
+	//return the ressponse
+	fmt.Fprintf(w, "%s", greeting)
+}
+
+func getCookie(w http.ResponseWriter, r *http.Request) string {
+
+	name := ""
+	//if cookie exists, read stored username
+	var cookie, err = r.Cookie("username")
+	if err == nil {
+		name = cookie.Value
+	}
+	//  if there is no cookie, Create a cookie instance and set the cookie.
+	if name == "" {
+		//get the name from the input box
+		name = r.URL.Query().Get("name")
+	}
+	cookie = &http.Cookie{
+		Name:    "username",
+		Value:   name,
+		Expires: time.Now().Add(72 * time.Hour),
+	}
+	//set cookie
+	http.SetCookie(w, cookie)
+	return name
 }
 
 func chatSession(w http.ResponseWriter, r *http.Request) {
 
-	http.FileServer(http.Dir("./static"))
-	fmt.Fprintf(w, "%s", generateGreeting())
+	name := getCookie(w, r)
+	fmt.Fprintf(w, "%s", name)
 
+}
+func readFiles() {
+	// Read the substitutions file.
+	winston.readsubstitutions("data/substitutions.txt")
+	// Read the responses file.
+	winston.readresponses("data/responses.txt")
 }
 
 // Program entry point.
 func main() {
+	readFiles()
 	fs := http.FileServer(http.Dir("static"))
 	http.Handle("/", fs)
+
 	http.HandleFunc("/chat-session", chatSession)
-
-	//http.HandleFunc("/", chatSession)
-	http.HandleFunc("/user-input", userinputhandler)
-	http.ListenAndServe(":8000", nil)
-
-}
-
-/*
-func main() {
-
-	//random num generator
-	rand.Seed(time.Now().UTC().UnixNano())
-	//Radnomly pick a response from the greetings array
-	//return a random response
-	// parse the session html file
-
-	http.HandleFunc("/", chatSession)
-	//	t, _ = template.ParseFiles("/static/index.html")
-	// Adapted from: http://www.alexedwards.net/blog/serving-static-sites-with-go
-
-	//fs := http.FileServer(http.Dir("static"))
-	//http.Handle("/", fs)
-
-	//tmpl, _ := template.ParseFiles("/static/session.html")
-	/*
-		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-			http.FileServer(http.Dir("static"))
-			greet := GreetingData{
-				Greeting: "hello",
-			}
-
-			tmpl.Execute(w, greet)
-
-		})
-
-	//http.Handle("/", fs)
-	//http.Handle("/", fs)
+	http.HandleFunc("/generate-greeting", generateGreeting)
 	http.HandleFunc("/user-input", userinputhandler)
 	http.ListenAndServe(":8080", nil)
+
 }
-*/
